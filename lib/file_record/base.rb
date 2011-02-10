@@ -8,8 +8,9 @@ module FileRecord
     include ActiveModel::Serializers::JSON
 
     def initialize
-      @attributes = {}
+      @attributes = {}  
     end
+
     attr_reader :attributes
 
     attribute_method_prefix "clear_"
@@ -22,13 +23,37 @@ module FileRecord
       define_attribute_methods args
     end
 
+    fields :name
+    validates :name, :presence => true
+
     # include ActiveModel::Conversion
     def to_model
       self
     end
 
     def persisted?
-      false
+      name && File.exists?(name)
+    end
+
+    def save
+      if valid?
+        File.open(name, 'w') {|f| f.write(to_json) } 
+        true
+      else
+        false
+      end
+    end
+
+    def destroy
+      File.delete(name) if persisted?
+    end
+
+    def self.find(name)
+      if File.exists? name
+        self.new.from_json(File.read(name))
+      else
+        nil 
+      end
     end
 
     def to_key
