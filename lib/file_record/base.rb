@@ -1,9 +1,7 @@
 module FileRecord
   class Base
 
-    def self.model_name
-      to_s
-    end
+    extend ActiveModel::Naming
 
     # include ActiveModel::Conversion
     def to_model
