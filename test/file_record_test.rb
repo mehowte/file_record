@@ -36,9 +36,17 @@ class FileRecordTest < ActiveSupport::TestCase
     assert !@model.street_valid?
     assert @model.house_number_valid?
   end
-
+ 
   test "model with proper fields is valid" do
     assert @model.valid?
+  end
+
+  test "can be (de)serialized" do
+    json = @model.to_json
+    deserialized = Address.new
+    deserialized.from_json json
+    assert deserialized.street == model.street
+    assert deserialized.house_number == model.house_number
   end
 
   test "model without street in invalid" do
