@@ -4,7 +4,7 @@ module FileRecord
     extend ActiveModel::Naming
 
     def self.fields(*args)
-
+      attr_accessor(*args)
     end
 
     def valid?
