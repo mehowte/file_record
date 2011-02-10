@@ -16,6 +16,46 @@ class FileRecordTest < ActiveSupport::TestCase
     @model = Address.new
     @model.street = "Florianska"
     @model.house_number = 18
+    @model.name = "pauza"
+  end
+
+  def teardown
+    File.delete("pauza") if File.exists?("pauza")
+  end
+
+  test "can be saved" do
+    assert !@model.persisted?
+    assert @model.save
+    assert @model.persisted?
+  end
+
+  test "saved can be found" do
+    assert @model.save
+    found = Address.find("pauza")
+    assert !found.nil?
+    assert found.street == @model.street
+    assert found.house_number == @model.house_number
+  end
+
+  test "requires name" do
+    @model.clear_name
+    assert !@model.valid?
+  end
+
+  test "saved can be destroyed" do
+    assert @model.save
+    assert @model.destroy
+    assert !@model.persisted?
+  end
+
+  test "can't find not existing" do
+    assert Address.find("nieistniejacy") == nil
+  end
+
+  test "cannot be saved when invalid" do
+    @model.clear_street
+    assert !@model.save
+    assert !@model.persisted?
   end
 
   test "attributes can be cleared" do
@@ -45,8 +85,8 @@ class FileRecordTest < ActiveSupport::TestCase
     json = @model.to_json
     deserialized = Address.new
     deserialized.from_json json
-    assert deserialized.street == model.street
-    assert deserialized.house_number == model.house_number
+    assert deserialized.street == @model.street
+    assert deserialized.house_number == @model.house_number
   end
 
   test "model without street in invalid" do
