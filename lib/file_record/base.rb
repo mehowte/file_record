@@ -12,23 +12,12 @@ module FileRecord
     attr_reader :attributes
 
     attribute_method_prefix "clear_"
+    attribute_method_prefix ""
+    attribute_method_suffix "="
     attribute_method_suffix "_valid?"
     
 
     def self.fields(*args)
-      @attributes ||= {}
-      args.each do |attribute|
-
-        define_method(:"#{attribute}") do
-          @attributes[attribute]
-        end
-
-        define_method(:"#{attribute}=") do |value|
-          @attributes[attribute] = value
-        end
-
-         
-      end
       define_attribute_methods args
     end
 
@@ -50,6 +39,14 @@ module FileRecord
     end
 
   private
+    def attribute(name)
+      @attributes[name]
+    end
+
+    def attribute=(name, value)
+      @attributes[name] = value
+    end
+
     def clear_attribute(attribute)
       send(:"#{attribute}=", nil)
     end
