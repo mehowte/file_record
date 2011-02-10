@@ -3,6 +3,7 @@ module FileRecord
 
     extend ActiveModel::Naming
     include ActiveModel::Validations
+    extend ActiveModel::Translation
 
     def self.fields(*args)
       attr_accessor(*args)
