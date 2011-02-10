@@ -20,7 +20,7 @@ class FileRecordTest < ActiveSupport::TestCase
   end
 
   def teardown
-    File.delete("pauza") if File.exists?("pauza")
+    File.delete("tmp/file_records/pauza") if File.exists?("tmp/file_records/pauza")
   end
 
   test "tracks changes" do
