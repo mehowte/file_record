@@ -2,6 +2,11 @@ module FileRecord
   class Base
 
     extend ActiveModel::Naming
+
+    def self.fields(*args)
+
+    end
+
     def valid?
       true
     end
