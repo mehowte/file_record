@@ -23,6 +23,20 @@ class FileRecordTest < ActiveSupport::TestCase
     File.delete("pauza") if File.exists?("pauza")
   end
 
+  test "tracks changes" do
+    assert @model.changed?
+    assert @model.save
+    assert !@model.changed?
+    @model.street = "Florianska"
+    assert !@model.changed?
+    @model.street = "Grodzka"
+    assert @model.changed?
+    assert !Address.find("pauza").changed?
+    @model.reset_street!
+    assert @model.street == "Florianska"
+    #assert !@model.changed?
+  end
+
   test "can be saved" do
     assert !@model.persisted?
     assert @model.save
