@@ -2,23 +2,10 @@ module FileRecord
   class Base
 
     extend ActiveModel::Naming
+    include ActiveModel::Validations
 
     def self.fields(*args)
       attr_accessor(*args)
-    end
-
-    def self.validate(*args)
-    end
-
-    def valid?
-      true
-    end
-
-    def errors
-      obj = Object.new
-      def obj.[](key)         [] end
-      def obj.full_messages() [] end
-      obj   
     end
 
     # include ActiveModel::Conversion
