@@ -6,6 +6,7 @@ module FileRecord
     extend ActiveModel::Translation
     include ActiveModel::AttributeMethods
     include ActiveModel::Serializers::JSON
+    include ActiveModel::Dirty
 
     def initialize
       @attributes = {}  
@@ -37,6 +38,8 @@ module FileRecord
 
     def save
       if valid?
+        @previously_changed = changes
+        @changed_attributes.clear
         File.open(name, 'w') {|f| f.write(to_json) } 
         true
       else
@@ -68,11 +71,13 @@ module FileRecord
     def attributes=(attributes)
       @attributes = attributes
     end
+
     def attribute(name)
       @attributes[name]
     end
 
     def attribute=(name, value)
+      attribute_will_change!(name) if @attributes[name] != value
       @attributes[name] = value
     end
 
