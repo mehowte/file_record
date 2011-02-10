@@ -6,6 +6,9 @@ class Address < FileRecord::Base
 end
 
 class FileRecordTest < ActiveSupport::TestCase
+  
+  include ActiveModel::Lint::Tests
+
   def setup
     @model = Address.new
   end
