@@ -7,6 +7,9 @@ module FileRecord
       attr_accessor(*args)
     end
 
+    def self.validate(*args)
+    end
+
     def valid?
       true
     end
