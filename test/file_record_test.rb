@@ -18,6 +18,25 @@ class FileRecordTest < ActiveSupport::TestCase
     @model.house_number = 18
   end
 
+  test "attributes can be cleared" do
+    @model.clear_street
+    assert @model.street.nil? 
+    @model.clear_house_number
+    assert @model.clear_house_number.nil? 
+  end
+
+  test "attributes can be validated" do
+    assert @model.valid?
+    assert @model.street_valid?
+    assert @model.house_number_valid?
+
+    @model.street = nil
+
+    assert !@model.valid?
+    assert !@model.street_valid?
+    assert @model.house_number_valid?
+  end
+
   test "model with proper fields is valid" do
     assert @model.valid?
   end
