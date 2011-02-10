@@ -2,6 +2,16 @@ module FileRecord
   class Base
 
     extend ActiveModel::Naming
+    def valid?
+      true
+    end
+
+    def errors
+      obj = Object.new
+      def obj.[](key)         [] end
+      def obj.full_messages() [] end
+      obj   
+    end
 
     # include ActiveModel::Conversion
     def to_model
@@ -17,7 +27,7 @@ module FileRecord
     end
 
     def to_param
-      persisted? ? to_key.join('-') : false
+      persisted? ? to_key.join('-') : nil
     end
 
     
