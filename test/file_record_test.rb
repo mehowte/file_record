@@ -47,4 +47,29 @@ class FileRecordTest < ActiveSupport::TestCase
     assert @model.respond_to?(:house_number) 
     assert @model.respond_to?(:house_number=) 
   end
+
+  test "model_name.human uses I18n" do 
+    begin
+      custom_translations = {
+        :activemodel => { 
+          :models => { 
+            :address => "Translated address" 
+          },
+          :errors => {
+            :messages => {
+              :blank => "Translated error"
+            }
+          }
+        } 
+      }
+      I18n.backend.store_translations :en, custom_translations
+      assert_equal "Translated address", @model.class.model_name.human 
+      @model.street = nil
+      @model.valid?
+      assert_equal "Translated error", @model.errors[:street].first 
+    ensure
+      I18n.reload!
+    end 
+  end
+
 end
