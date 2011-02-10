@@ -1,6 +1,10 @@
 module FileRecord
   class Base
 
+    def self.model_name
+      to_s
+    end
+
     # include ActiveModel::Conversion
     def to_model
       self
@@ -18,6 +22,7 @@ module FileRecord
       persisted? ? to_key.join('-') : false
     end
 
+    
   end
   
 end
