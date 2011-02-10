@@ -5,6 +5,7 @@ module FileRecord
     include ActiveModel::Validations
     extend ActiveModel::Translation
     include ActiveModel::AttributeMethods
+    include ActiveModel::Serializers::JSON
 
     def initialize
       @attributes = {}
@@ -39,6 +40,9 @@ module FileRecord
     end
 
   private
+    def attributes=(attributes)
+      @attributes = attributes
+    end
     def attribute(name)
       @attributes[name]
     end
