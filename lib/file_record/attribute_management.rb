@@ -12,6 +12,7 @@ module FileRecord
     def attributes=(attributes)
       @attributes = attributes
       sanitize_attributes
+
     end
 
     def sanitize_attributes
@@ -22,7 +23,8 @@ module FileRecord
 
     module ClassMethods
       def attributes(*attribute_names)
-        self._attribute_names = attribute_names
+        self._attribute_names += attribute_names
+        self._attribute_names.uniq!
       end
     end
 

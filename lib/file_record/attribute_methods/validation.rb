@@ -5,11 +5,11 @@ module FileRecord
       include ActiveModel::AttributeMethods
 
       included do
-        attribute_method_suffix "_valid?"
+        attribute_method_affix :prefix => 'is_', :suffix => "_valid?"
       end
 
       protected
-      def attribute_valid?(attribute)
+      def is_attribute_valid?(attribute)
         valid? || errors[attribute].empty?
       end
     end

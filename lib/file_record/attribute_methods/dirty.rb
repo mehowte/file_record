@@ -3,7 +3,6 @@ module FileRecord
     module Dirty
       extend ActiveSupport::Concern
 
-      include AttributeMethods::Write
       include ActiveModel::Dirty
 
       def save

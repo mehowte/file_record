@@ -4,4 +4,6 @@ module FileRecord
   autoload :AttributeManagement, 'file_record/attribute_management'
   autoload :Persistence, 'file_record/persistence'
   autoload :Validations, 'file_record/validations'
+  autoload :Callbacks, 'file_record/callbacks'
+  autoload :Compatibility, 'file_record/compatibility'
 end

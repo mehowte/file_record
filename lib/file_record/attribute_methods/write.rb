@@ -11,7 +11,7 @@ module FileRecord
 
       protected
       def attribute=(name, value)
-        attributes[name] = value
+        @attributes[name] = value
       end
 
       def clear_attribute(attribute)

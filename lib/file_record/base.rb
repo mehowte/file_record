@@ -1,13 +1,12 @@
 module FileRecord
   class Base
-    extend ActiveModel::Naming
-    extend ActiveModel::Translation
-    include ActiveModel::Conversion
 
     include AttributeManagement
     include Persistence
     include Validations
+    include Callbacks
     include AttributeMethods::All
+    include Compatibility
 
     attributes :id
     validates :id, :presence => true

@@ -16,7 +16,7 @@ module FileRecord
 
       protected
       def attribute(name)
-        attributes[name]
+        @attributes[name]
       end
 
     end

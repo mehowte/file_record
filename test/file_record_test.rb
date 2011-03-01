@@ -2,10 +2,31 @@ require 'test_helper'
 
 
 class Address < FileRecord::Base
+  def initialize(attributes ={})
+    super(attributes)
+  end
   attributes :street, :house_number
 
   validates :street, :house_number, :presence => true
   validates :house_number, :numericality => true
+
+  before_save :before_save_callback
+  after_save :after_save_callback
+  before_destroy :before_destroy_callback
+  after_destroy :after_destroy_callback
+  attr_reader :callback_info
+  def before_save_callback
+    @callback_info = "#{@callback_info}a"
+  end
+  def after_save_callback
+    @callback_info = "#{@callback_info}b"
+  end
+  def before_destroy_callback
+    @callback_info = "#{@callback_info}c"
+  end
+  def after_destroy_callback
+    @callback_info = "#{@callback_info}d"
+  end
 end
 
 class FileRecordTest < ActiveSupport::TestCase
@@ -21,6 +42,12 @@ class FileRecordTest < ActiveSupport::TestCase
 
   def teardown
     File.delete("tmp/file_records/pauza") if File.exists?("tmp/file_records/pauza")
+  end
+
+  test "runs callbacks" do
+    x = Address.create({'id' => "kot", 'street' => "Psia", 'house_number' => 4})
+    x.destroy
+    assert x.callback_info == "abcd"
   end
 
   test "tracks changes" do
@@ -81,14 +108,14 @@ class FileRecordTest < ActiveSupport::TestCase
 
   test "attributes can be validated" do
     assert @model.valid?
-    assert @model.street_valid?
-    assert @model.house_number_valid?
+    assert @model.is_street_valid?
+    assert @model.is_house_number_valid?
 
     @model.street = nil
 
     assert !@model.valid?
-    assert !@model.street_valid?
-    assert @model.house_number_valid?
+    assert !@model.is_street_valid?
+    assert @model.is_house_number_valid?
   end
  
   test "model with proper fields is valid" do
