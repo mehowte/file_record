@@ -36,12 +36,7 @@ module FileRecord
 
 
     def save
-      if valid?
         File.open(self.class.filename(id), 'w') {|f| f.write(to_json) } 
-        true
-      else
-        false
-      end
     end
 
 
