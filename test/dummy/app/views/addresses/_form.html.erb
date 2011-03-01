@@ -10,10 +10,14 @@
       </ul>
     </div>
   <% end %>
+  <% if @address.persisted? %>
+    <p>Id: <em><%= @address.id %></em></p>
+  <% else %>
   <div class="field">
     <%= f.label :id %><br />
     <%= f.text_field :id %>
   </div>
+  <% end %>
   <div class="field">
     <%= f.label :street %><br />
     <%= f.text_field :street %>
