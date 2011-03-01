@@ -2,7 +2,7 @@ require 'test_helper'
 
 
 class Address < FileRecord::Base
-  fields :street, :house_number
+  attributes :street, :house_number
 
   validates :street, :house_number, :presence => true
   validates :house_number, :numericality => true
@@ -16,7 +16,7 @@ class FileRecordTest < ActiveSupport::TestCase
     @model = Address.new
     @model.street = "Florianska"
     @model.house_number = 18
-    @model.name = "pauza"
+    @model.id = "pauza"
   end
 
   def teardown
@@ -52,7 +52,7 @@ class FileRecordTest < ActiveSupport::TestCase
   end
 
   test "requires name" do
-    @model.clear_name
+    @model.clear_id
     assert !@model.valid?
   end
 
@@ -129,6 +129,10 @@ class FileRecordTest < ActiveSupport::TestCase
     assert @model.respond_to?(:house_number=) 
   end
 
+  test "ignores not defined attributes" do
+    @model.update_attributes({:wrong => "anything"})
+    assert @model.attributes[:wrong] == nil
+  end
   test "model_name.human uses I18n" do 
     begin
       custom_translations = {

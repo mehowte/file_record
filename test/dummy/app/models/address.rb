@@ -3,7 +3,7 @@ class Address < FileRecord::Base
       super(attributes)
     end
 
-  fields :street, :house_number
+  attributes :street, :house_number
 
   validates :street, :house_number, :presence => true
   validates :house_number, :numericality => true
