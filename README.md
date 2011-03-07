@@ -4,11 +4,16 @@ FileRecord
 Simplistic implementation of persistent model library. 
 Inspired by ActiveRecord. And fully compatible with ActiveModel.
 
-Dcumentation
+Created alongside the presentation [Digging into Rails 3.x internals - ActiveModel][0]
+
+Documentation
 ------------
 
-See (the presentation)[http://active-model-krug-1-3-2011.heroku.com]
-Look into test and test/dummy directory.
+See [the presentation][0]
+Look into 
+    test 
+and 
+    test/dummy directory.
 
 Testing
 -------
@@ -17,13 +22,15 @@ Testing
 
 Demo app
 --------
-    
+    ]
     cd test/dummy
     rails server
 
-... and then visit [http://localhost:3000/addresses]
+... and then visit [addresses index on localhost](http://localhost:3000/addresses)
 
-models will be saved into test/dummy/tmp/file_records
+models will be saved into 
+    
+    test/dummy/tmp/file_records
 
 License
 -------
@@ -47,3 +54,5 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+[0]: http://active-model-krug-1-3-2011.heroku.com/
