@@ -6,23 +6,30 @@ Inspired by ActiveRecord. And fully compatible with ActiveModel.
 
 Created alongside the presentation [Digging into Rails 3.x internals - ActiveModel][0]
 
+Installation
+------------
+
+    git clone git://github.com/mehowte/file_record.git
+    cd file_record
+    bundle install
+
 Documentation
 ------------
 
-See [the presentation][0]
-Look into 
+1. See [the presentation][0]
+
+2. Look into 
     test 
 and 
     test/dummy directory.
 
-Testing
+Running tests
 -------
 
     rake
 
-Demo app
+Running demo app
 --------
-    ]
     cd test/dummy
     rails server
 
