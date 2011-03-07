@@ -41,7 +41,7 @@ class FileRecordTest < ActiveSupport::TestCase
   end
 
   def teardown
-    File.delete("tmp/file_records/pauza") if File.exists?("tmp/file_records/pauza")
+    File.delete("test/dummy/tmp/file_records/pauza") if File.exists?("test/dummy/tmp/file_records/pauza")
   end
 
   test "runs callbacks" do

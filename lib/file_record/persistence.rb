@@ -13,7 +13,7 @@ module FileRecord
       end
 
       def all
-        Dir.new("tmp/file_records").entries.reject do |name|
+        Dir.new(Rails.root + "tmp/file_records").entries.reject do |name|
           File.directory?(name)  
         end.map do |name|
           find(name)
@@ -26,7 +26,7 @@ module FileRecord
     end
 
       def filename(name)
-        "tmp/file_records/" + name
+        Rails.root + "tmp/file_records/" + name
       end
     end
 
