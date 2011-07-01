@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    file_record (0.0.1)
+    file_record (0.1.0)
       rails (~> 3.0.4)
 
 GEM
