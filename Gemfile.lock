@@ -1,3 +1,9 @@
+PATH
+  remote: .
+  specs:
+    file_record (0.0.1)
+      rails (~> 3.0.4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -96,6 +102,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  capybara (>= 0.4.0)
-  rails (= 3.0.4)
+  capybara
+  file_record!
   sqlite3-ruby
